@@ -1,13 +1,18 @@
 from pydantic_settings import BaseSettings
+from typing import List, Optional
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Museum Robot API"
     API_V1_PREFIX: str = "/api/v1"
 
-    # MQTT
+    # MQTT (async con gmqtt)
     MQTT_BROKER_HOST: str = "localhost"
     MQTT_BROKER_PORT: int = 1883
-    MQTT_TOPIC: str = ""
+    MQTT_CLIENT_ID: str = "museum-admin-api"
+    MQTT_TOPICS: List[str] = [] 
+    MQTT_USERNAME: Optional[str] = None
+    MQTT_PASSWORD: Optional[str] = None
+    MQTT_QOS: int = 1
 
     class Config:
         env_file = ".env"

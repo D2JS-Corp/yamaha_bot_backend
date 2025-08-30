@@ -57,10 +57,13 @@ pip install -r requirements.txt
 
 ```env
 PROJECT_NAME="Museum Robot API"
-MQTT_BROKER_HOST=
-MQTT_BROKER_PORT=
-MQTT_TOPIC=
-DATABASE_URL=
+MQTT_BROKER_HOST="localhost"
+MQTT_BROKER_PORT=1883
+MQTT_CLIENT_ID="museum-admin-api"
+MQTT_TOPICS='["ros2/chatter"]'
+MQTT_USERNAME=
+MQTT_PASSWORD=
+MQTT_QOS=1
 ```
 
 ---
