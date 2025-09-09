@@ -13,4 +13,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pylint
-      - run: pylint yamaha_bot_backend/
+      - run: pylint .
