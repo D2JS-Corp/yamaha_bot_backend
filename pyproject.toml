@@ -1,0 +1,2 @@
+[tool.pylint.MASTER]
+init-hook='import sys; sys.path.append("yamaha_bot_backend")'

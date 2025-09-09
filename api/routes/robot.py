@@ -1,11 +1,14 @@
 from fastapi import APIRouter, HTTPException
-from services.telemetry_store import telemetry_store
+
+from yamaha_bot_backend.services.telemetry_store import telemetry_store
 
 router = APIRouter(prefix="/robot", tags=["Robot"])
+
 
 @router.get("/latest")
 async def get_latest():
     return await telemetry_store.latest_all()
+
 
 @router.get("/latest/{topic:path}")
 async def get_latest_topic(topic: str):

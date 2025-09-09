@@ -1,5 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
-from main import app
+
+from yamaha_bot_backend.main import app
 
 app.add_middleware(
     CORSMiddleware,
