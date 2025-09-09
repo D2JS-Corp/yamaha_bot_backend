@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
+
 class TelemetryStore:
     def __init__(self) -> None:
         self._data: Dict[str, Dict[str, Any]] = {}
@@ -26,9 +27,10 @@ class TelemetryStore:
     async def latest_all(self) -> Dict[str, Dict[str, Any]]:
         async with self._lock:
             return dict(self._data)
-        
+
     async def latest_by_topic(self, topic: str) -> Optional[Dict[str, Any]]:
         async with self._lock:
             return self._data.get(topic)
-        
+
+
 telemetry_store = TelemetryStore()
