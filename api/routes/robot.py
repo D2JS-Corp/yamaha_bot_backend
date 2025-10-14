@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from yamaha_bot_backend.services.telemetry_store import telemetry_store
+from yamaha_bot_backend.services.robot_service import robot_service
 
 router = APIRouter(prefix="/robot", tags=["Robot"])
 
@@ -16,3 +17,16 @@ async def get_latest_topic(topic: str):
     if not data:
         raise HTTPException(status_code=404, detail="Tópico sin datos")
     return data
+
+
+@router.get("/position")
+async def get_robot_position():
+    return await robot_service.get_current_position()
+
+
+@router.post("/move")
+async def move_robot():
+    result = await robot_service.move_to_next_base()
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
