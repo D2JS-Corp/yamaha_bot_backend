@@ -1,9 +1,6 @@
 import asyncio
 import random
-from typing import Optional
 from enum import Enum
-
-from yamaha_bot_backend.services.telemetry_store import telemetry_store
 
 
 class RobotPosition(int, Enum):
@@ -26,12 +23,12 @@ class RobotService:
                 "position_name": self._current_position.name,
                 "is_moving": self._is_moving,
             }
-        
+
     async def move_to_next_base(self) -> dict:
         async with self._lock:
             if self._is_moving:
                 return {"error": "El robot ya se está moviendo"}
-            
+
             previus_position = self._current_position
 
             self._is_moving = True
@@ -49,7 +46,7 @@ class RobotService:
                 "next_position": next_position.value,
                 "estimated_time": "hasta 30 segundos"
             }
-        
+
     async def _simulate_movement(self, target_position: RobotPosition):
         move_time = random.randint(10, 30)
 
