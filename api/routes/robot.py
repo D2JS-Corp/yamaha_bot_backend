@@ -19,6 +19,16 @@ async def get_latest_topic(topic: str):
     return data
 
 
+@router.get("/topic/{topic:path}")
+async def get_topic_records(topic: str):
+    """Obtiene los últimos registros de un tópico (máximo 12)"""
+    records = await telemetry_store.topic(topic)
+    return {
+        "topic": topic,
+        "count": len(records), #type: ignore
+        "records": records
+    }
+
 @router.get("/position")
 async def get_robot_position():
     return await robot_service.get_current_position()
