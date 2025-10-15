@@ -11,7 +11,14 @@ class Settings(BaseSettings): # pylint: disable=too-few-public-methods
     MQTT_BROKER_HOST: str = "localhost"
     MQTT_BROKER_PORT: int = 1883
     MQTT_CLIENT_ID: str = "museum-admin-api"
-    MQTT_TOPICS: List[str] = ["ros2/chatter"]
+    MQTT_TOPICS: List[str] = [
+        "ros2/battery",
+        "ros2/dock",
+        "ros2/velocity",
+        "ros2/goal",
+        "ros2/position"
+    ]
+    
     MQTT_USERNAME: Optional[str] = None
     MQTT_PASSWORD: Optional[str] = None
     MQTT_QOS: int = 1

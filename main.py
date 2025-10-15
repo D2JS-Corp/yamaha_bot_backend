@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from yamaha_bot_backend.api.routes import api_router
 from yamaha_bot_backend.infrastructure.mqtt_async import mqtt
@@ -18,14 +19,21 @@ async def lifespan(_app: FastAPI):
     try:
         yield
     finally:
-        print("🐭 Finalizando todo lo necesario...")
-        # Desconecta al broker
+        print("🐭 Finalizando todo lo necesario...http://127.0.0.1:8000/api/v1/robot/topic/ros2%2Fbattery")
+        # Desconecta al brokerhttp://127.0.0.1:8000/api/v1/robot/topic/ros2%2Fbattery
         await mqtt.disconnect()
 
 
 app = FastAPI(title="Yamaha Administrative API", lifespan=lifespan)
 app.include_router(api_router)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Endpoint de salud
 @app.get("/")
