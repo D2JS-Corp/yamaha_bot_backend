@@ -1,61 +1,9 @@
-# 🤖 Museum Robot API
-
-Este proyecto implementa un **backend en FastAPI** para el panel administrativo de un **robot guía turístico de museo**.  
-La API consume datos del robot a través del protocolo **MQTT** y los expone en una **API REST** para que puedan ser consumidos por un frontend.
-
----
-
-## Estructura del proyecto
-
-```
-
-app/
-│── api/                # Endpoints REST
-│── core/               # Configuración y settings
-│── domain/             # Modelos de dominio
-│── infrastructure/     # Integraciones externas
-│── services/           # Lógica de negocio
-│── main.py             # Punto de entrada FastAPI
-
-````
-
----
-
+# ¿Cómo correr el proyecto?
 ## Requisitos
-
-- Python **3.10+**
-- [pip](https://pip.pypa.io/)
-- Un broker **MQTT** (ej: Mosquitto)
-
----
-
-## Instalación
-
-1. Clonar el repositorio:
-
-```bash
-git clone https://github.com/D2JS-Corp/YamahaBotBackend.git
-cd YamahaBotBackend
-````
-
-2. Crear y activar un entorno virtual:
-
-```bash
-python -m venv venv
-source venv/bin/activate   # Linux / MacOS
-venv\Scripts\activate      # Windows
-```
-
-3. Instalar dependencias:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Configurar variables de entorno:
-   Crea un archivo `.env` en la raíz del proyecto:
-
-```env
+- Un Broker MQTT
+## Paso a Paso
+1. Necesitas crear el archivo .env en la raíz del proyecto. Estas son las variables que debe llevar dicho archivo
+~~~ conf
 PROJECT_NAME="Museum Robot API"
 MQTT_BROKER_HOST="localhost"
 MQTT_BROKER_PORT=1883
@@ -64,28 +12,19 @@ MQTT_TOPICS='["ros2/chatter"]'
 MQTT_USERNAME=
 MQTT_PASSWORD=
 MQTT_QOS=1
-```
+~~~
+2. Accede desde tu consola a la raíz del proyecto, crea un entorno virtual e instala las dependencias
+~~~ bash
+# Usa el gestor de entornos de tu preferencia
+python -m venv venv
+source venv/bin/activate
 
----
+pip install -r requirements.txt
+~~~
+3. Para correr el proyecto debes ubicarte en la carpeta padre del repositorio y desde allí podrás inicializarlo
+~~~ bash
+# Para ir a la carpeta superior
+cd ..
 
-## Ejecución
-
-Iniciar la API:
-
-```bash
-uvicorn main:app --reload
-```
-
-La API estará disponible en:
-
-* Documentación Swagger: [http://localhost:8000/docs](http://localhost:8000/docs)
-* Documentación ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
-
----
-
-
-## Autor
-
-Desarrollado por ***D2JS*** 🪙
-
----
+uvicorn yamaha_bot_backend.main:app --reload
+~~~
